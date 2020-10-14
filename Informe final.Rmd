@@ -70,14 +70,15 @@ corrplot::corrplot(correlacion)
 ```
 **3) Modelo propuesto entre las variables físico-químicas y biológicas:**
 
-```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en el suelo muestreado."}
+```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
 (ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
+
 ```
 
 ```{r data5, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
 fit2 <- glance(fit1)
-kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto (diversidad~pH)") %>% kable_styling(bootstrap_options = c("striped", 
+kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(bootstrap_options = c("striped", 
     "hover", "condensed"))
 ```
 
