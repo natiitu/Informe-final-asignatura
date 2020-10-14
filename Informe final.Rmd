@@ -24,7 +24,7 @@ data <- read_excel("data.xlsx")
 
 ## Introducción
 
-Chile basa gran parte de su economía en la extracción, refinación y exportación de metales como el cobre y zinc, posicionándose a nivel mundial entre los primeros países con mayor producción, llegando a aportar hasta un 31,5% de demanda mundial de cobre (Comisión Chilena de Cobre <http://www.cochilco.cl>, cuya producción que se genera principalmente entre las regiones norte a centro del país. 
+Chile basa gran parte de su economía en la extracción, refinación y exportación de metales como el cobre y zinc, posicionándose a nivel mundial entre los primeros países con mayor producción, llegando a aportar hasta un 31,5% de demanda mundial de cobre (Comisión Chilena de Cobre, <http://www.cochilco.cl>), cuya producción que se genera principalmente entre las regiones norte a centro del país. 
 Los problemas ambientales asociados con la minería son ampliamente conocidos, particularmente en relación a la contaminación de suelos con metales, elementos que disminuyen la calidad y presentan riesgo para el buen funcionamiento de este *(Bloem et al. 2009)*.
 Gran parte de esta producción se centra en las regiones centrales y sur del país, donde ocurre un solapamiento de los sectores productivos generando contaminación de metales en suelos de carácter agrícola; como lo reporta *Parra et al., 2014*.
 Si bien se conoce la respuesta de algunas bacterias a la presión causada por elevadas concentraciones de metales, no existen estudiosque evalúen cómo se comportan aislados ambientales que se encuentran en suelos que ya tienen altas concentraciones de estos elementos.
@@ -37,6 +37,26 @@ Conociendo la problemática que se presenta en los suelos de la región de Valpa
 
 **Determinación de las características físico-químicas:**Para determinar las características fisicoquímicas generales de los suelos, se recolectó 1 kg desub-muestra la cual fue guardada en bolsas resellables y una alícuota de 50 gr fue guardada en tubo falcon bajo condiciones esteriles para los análisis microbiológicos. Cada sub-muestra fue secada a 40°C por 48 horas. Las características fisicoquímicas generales de los suelos (conductividad eléctrica, pH, contenido de materia orgánica, relación carbono-nitrógeno y texturas) fueron determinadas por métodos de rutina *(Verdejo et al. 2015)*. Las concentraciones de cobre disponible y de metales totales y solubles fueron determinadas por espectroscopia atómica de masas. Los análisis fueron realizados por el Laboratorio de Suelos y Análisis Foliar de la Facultad de Agronomía de la PUCV. 
  
-**Determinación del número de bacterias en las muestras de suelo:** Para la determinación del número de bacterias se utilizó el método de número más probable (NMP) *(Cochran, 1950)*. Se pesó 10 g de suelo seco y se diluyeron en 90 ml de buffer fosfato (PBS). La solución fue sometida a agitación orbital a 200 rpm por 30 min a 30°C para homogenizar y disolver los agregados de suelo *(Altimira et al. 2012)*. Mientras que la diversidad fue estimada por 
+**Determinación del número de bacterias en las muestras de suelo:** Para la determinación del número de bacterias se utilizó el método de número más probable (NMP) *(Cochran, 1950)*. Se pesó 10 g de suelo seco y se diluyeron en 90 ml de buffer fosfato (PBS). La solución fue sometida a agitación orbital a 200 rpm por 30 min a 30°C para homogenizar y disolver los agregados de suelo *(Altimira et al. 2012)*. 
 
+## Resultados 
+
+**1) Descripción de datos**
+
+A partir de los resultados presentados en la tabla 1. Se puede determinar que el pH promedio de las muestras de suelos es 6,34. Mientras que el promedio del porcentaje de materia orgánica es 3,19%, el promedio de conductividad eléctrica que poseen los suelos es 1,01.En cuanto a la textura de los suelos, estos poseen un porcentaje promedio de arena del 82,4%,de limo 13,38% y arcilla, 4,22%. Por otra parte, la concentración de metales pesados, los suelos de Puchuncaví poseen en promedio 42,77 mg/kg de plomo, 380,95 mg/Kg de cobre, 140,15 mg/Kg de Zinc, 1,16 mg/kg de cadmio y 23,03 mg/kg de arsénico, cuyos resultados se presentan en la Table 1.
+En términos de parámetros biológicos, en promedio los suelos muestreados poseen 9,45x10^6 UFC/g suelo y además, poseen una diversidad promedio de 2,83. Los resultados mencionados anteriormente presentados en la table 2.
+
+```{r data, echo=FALSE, message=FALSE}
+data1 <- select(data, pH, EC, OM, sand, clay, silt, plomo, cobre, zinc, cadmio, arsenico)
+data2 <- data1 %>% summarise_all(mean)
+kable(data2, digits = 2, caption = "Medias de las variables físico-químicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que EC corresponde a la electroconductividad, OM se refiere al porcentaje de materia orgánica en los suelos analizados, sand corresponde al porcentaje de arena, clay al porcentaje de arcilla y silt es el porcentaje de limo. En cuanto a los metales pesados estos son presentados en unidades de mg/Kg") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
+
+
+```{r data1, echo=FALSE, message=FALSE}
+data3 <- select(data, bacterias, diversidad)
+data4 <- data3 %>% summarise_all(mean)
+kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que la columna bacterias corresponde al recuento bacteriano presente en los suelos expresado en UFC/gr de suelo") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
 
