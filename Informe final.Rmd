@@ -68,6 +68,41 @@ En términos del análisis de correlación de Pearson (P<0,05) entre las variabl
 correlacion <- cor(data) 
 corrplot::corrplot(correlacion)
 ```
+
+**3) Modelo propuesto entre las variables físico-químicas y biológicas:**
+
+```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
+(ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
+
+```
+
+```{r data5, echo=FALSE,message=FALSE}
+fit1 <- lm(diversidad~pH,data = data)
+fit2 <- glance(fit1)
+kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(bootstrap_options = c("striped", 
+    "hover", "condensed"))
+```
+
+```{r data6, echo=FALSE,message=FALSE}
+fit3 <-tidy(fit1)
+kable(fit3, digits = 2, caption = "Indicadores estadísticos de modelo propuesto donde la diversidad es explicada a partir de la variable pH obtenidos mediante tidy.") %>% kable_styling(bootstrap_options = c("striped", 
+    "hover", "condensed"))
+```
+
+```{r data7, echo=FALSE,message=FALSE}
+fit4 <- augment(fit1)
+kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuesto en el estudio: diveridad explicada por la variable pH.") %>% kable_styling(bootstrap_options = c("striped", 
+    "hover", "condensed"))
+```
+
+```{r data8, echo=FALSE,message=FALSE, fig.cap= "Histograma residuales"}
+hist(fit4$.resid)
+```
+
+Por otra parte,Podría ajustarse mejor si explicamos la variable diversidad con otras variables, como por ejemplo con la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico ). Se logró observar mediante el valor de AIC que entre los diferentes modelos propuestos, los mejores modelos eran: diversidad explicada por la variable pH y diversidad explicada por las variables pH y concentración de cobre en los suelos analizados.
+
+```{r data9, echo=FALSE,message=FALSE}
+
 **3) Modelo propuesto entre las variables físico-químicas y biológicas:**
 
 ```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
@@ -112,13 +147,14 @@ arsenico <- glance(arsenico1)
 Zinc1 <- lm(diversidad~pH + cobre + plomo + arsenico + zinc,data = data)
 Zinc <- glance(Zinc1)
 Modelo1 <- pH %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH")
-Modelo2 <- cobre %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + cobre")
-Modelo3 <- plomo %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + cobre + plomo")
-Modelo4 <- arsenico %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + cobre + plomo + arsenico")
-Modelo5 <- Zinc %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + cobre + plomo + arsenico + Zinc")
+Modelo2 <- cobre %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre")
+Modelo3 <- plomo %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo")
+Modelo4 <- arsenico %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo + Arsénico")
+Modelo5 <- Zinc %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo + Arsénico + Zinc")
 Modelos <- bind_rows(Modelo1, Modelo2, Modelo3, Modelo4, Modelo5) %>% arrange(AIC) %>% mutate(DeltaAIC = AIC - 
     min(AIC))
 kable(Modelos, digits = 2, caption = "Tabla con valores de r^2 y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
 ```
 
 ## Discusiones y conclusión
