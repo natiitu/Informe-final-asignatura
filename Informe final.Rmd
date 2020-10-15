@@ -1,12 +1,21 @@
 ---
-title: "Estudio correlacional entre las propiedades físico-químicas y microbiológicas de los suelos de Puchuncaví aledaños a la refinería CODELCO Ventanas"
+title: Estudio correlacional entre las propiedades físico-químicas y microbiológicas
+  de los suelos de Puchuncaví aledaños a la refinería CODELCO Ventanas
 author: "Natali Zamora Bugueño"
 date: "20-10-2020"
-output: pdf_document
+output:
+  pdf_document:
+    toc: no
+  bookdown::pdf_document2:
+    fig.caption: yes
+    toc: no
+    extra_dependencies: float
+bibliography: Biblio.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
 library(bookdown)
 library(tidyverse)
 library(dplyr)
@@ -15,6 +24,7 @@ library(readr)
 library(devtools)
 library(kableExtra)
 library(knitr)
+library(tinytex)
 library(FactoMineR)
 library(factoextra)
 library(readxl)
@@ -71,71 +81,36 @@ corrplot::corrplot(correlacion)
 
 **3) Modelo propuesto entre las variables físico-químicas y biológicas:**
 
-```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
+```{r data3, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
 (ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
 
 ```
-
-```{r data5, echo=FALSE,message=FALSE}
+```{r data4, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
 fit2 <- glance(fit1)
 kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(bootstrap_options = c("striped", 
     "hover", "condensed"))
 ```
 
-```{r data6, echo=FALSE,message=FALSE}
-fit3 <-tidy(fit1)
-kable(fit3, digits = 2, caption = "Indicadores estadísticos de modelo propuesto donde la diversidad es explicada a partir de la variable pH obtenidos mediante tidy.") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
-```
-
-```{r data7, echo=FALSE,message=FALSE}
-fit4 <- augment(fit1)
-kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuesto en el estudio: diveridad explicada por la variable pH.") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
-```
-
-```{r data8, echo=FALSE,message=FALSE, fig.cap= "Histograma residuales"}
-hist(fit4$.resid)
-```
-
-Por otra parte,Podría ajustarse mejor si explicamos la variable diversidad con otras variables, como por ejemplo con la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico ). Se logró observar mediante el valor de AIC que entre los diferentes modelos propuestos, los mejores modelos eran: diversidad explicada por la variable pH y diversidad explicada por las variables pH y concentración de cobre en los suelos analizados.
-
-```{r data9, echo=FALSE,message=FALSE}
-
-**3) Modelo propuesto entre las variables físico-químicas y biológicas:**
-
-```{r data4, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
-(ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
-
-```
-
 ```{r data5, echo=FALSE,message=FALSE}
-fit1 <- lm(diversidad~pH,data = data)
-fit2 <- glance(fit1)
-kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
-```
-
-```{r data6, echo=FALSE,message=FALSE}
 fit3 <-tidy(fit1)
 kable(fit3, digits = 2, caption = "Indicadores estadísticos de modelo propuesto donde la diversidad es explicada a partir de la variable pH obtenidos mediante tidy.") %>% kable_styling(bootstrap_options = c("striped", 
     "hover", "condensed"))
 ```
 
-```{r data7, echo=FALSE,message=FALSE}
+```{r data6, echo=FALSE,message=FALSE}
 fit4 <- augment(fit1)
 kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuesto en el estudio: diveridad explicada por la variable pH.") %>% kable_styling(bootstrap_options = c("striped", 
     "hover", "condensed"))
 ```
 
-```{r data8, echo=FALSE,message=FALSE, fig.cap= "Histograma residuales"}
+```{r data7, echo=FALSE,message=FALSE, fig.cap= "Histograma residuales"}
 hist(fit4$.resid)
 ```
 
 Por otra parte,Podría ajustarse mejor si explicamos la variable diversidad con otras variables, como por ejemplo con la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico ). Se logró observar mediante el valor de AIC que entre los diferentes modelos propuestos, los mejores modelos eran: diversidad explicada por la variable pH y diversidad explicada por las variables pH y concentración de cobre en los suelos analizados.
 
-```{r data9, echo=FALSE,message=FALSE}
+```{r data8, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
 pH <- glance(fit1)
 cobre1 <- lm(diversidad~pH + cobre,data = data)
@@ -155,7 +130,6 @@ Modelos <- bind_rows(Modelo1, Modelo2, Modelo3, Modelo4, Modelo5) %>% arrange(AI
     min(AIC))
 kable(Modelos, digits = 2, caption = "Tabla con valores de r^2 y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
-```
 
 ## Discusiones y conclusión
 
@@ -164,7 +138,6 @@ abundancia de las comunidades microbianas a largo término, encontrando que en u
 Sin embargo, cuando se presenta una periodicidad de disturbio (contaminación) durante un tiempo prolongado, las comunidades bacterianas resistentes de estos suelos tienden a desarrollarse y en un periodo largo de tiempo no se observan diferencias significativas entre las abundancias de un suelo poco contaminado a uno altamente contaminado *(Aleem, Isar and Malik 2003; Kuppusamy et al. 2016)*. Los suelos 30 analizados en este estudio han sido afectados por contaminantes durante aproximadamente 60 años con periodos de contaminación constante *(Altimira et al. 2012; Parra et al. 2014; Salmanighabeshi et al. 2015)*.
 Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microbianos, cuya estructura y composición se ve fuertemente influenciado por el parámetro ambiental de pH. Los suelos con pH neutro poseen una mayor diversidad a nivel de phylum con respecto a los suelos que poseen mayor acidez y alcalinidad *(Fierer et.al, 2012)*. Debido a la elevada contaminación y al interés que generan estos suelos por ser de carácter agrícola, es de vital importancia poseer un mecanismo de recuperación que restaure la salud de estos ecosistemas.
 
-## Referencias
 
 1) *Aleem A, Isar J, Malik A. Impact of long-term application of industrial wastewater on the emergence of resistance traits in Azotobacter chroococcum isolated from rhizospheric soil. Bioresour Technol 2003;86:7–13.* 
 
@@ -183,3 +156,6 @@ Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microb
 8) *Salmanighabeshi S, Palomo-Marín MR, Bernalte E et al. Long-term assessment of ecological risk from deposition of elemental pollutants in the vicinity of the industrial area of Puchuncaví Ventanas, central Chile. Sci Total Environ 2015;527–528:335–43.*
 
 9) *Parra S, Bravo MA, Quiroz W et al. Distribution of trace elements in particle size fractions for contaminated soils by a copper smelting from different zones of the Puchuncaví Valley (Chile). Chemosphere 2014;111:513–21.* 
+
+
+# Referencias
