@@ -28,7 +28,7 @@ library(broom)
 data <- read_excel("data.xlsx")
 ```
 
-## Introducción
+# Introducción
 
 Chile basa gran parte de su economía en la extracción, refinación y exportación de metales como el cobre y zinc, posicionándose a nivel mundial entre los primeros países con mayor producción, llegando a aportar hasta un 31,5% de demanda mundial de cobre (Comisión Chilena de Cobre, <http://www.cochilco.cl>), cuya producción que se genera principalmente entre las regiones norte a centro del país. 
 Los problemas ambientales asociados con la minería son ampliamente conocidos, particularmente en relación a la contaminación de suelos con metales, elementos que disminuyen la calidad y presentan riesgo para el buen funcionamiento de este *(Bloem et al. 2009)*.
@@ -37,7 +37,7 @@ Si bien se conoce la respuesta de algunas bacterias a la presión causada por el
 Es por esto que el presente estudio es del tipo exploratorio con alcance correlacional y descriptivo en donde se caracterizará las características físico-químicas y biológicas medidas en los suelos aledaños a empresas mineras.
 Conociendo la problemática que se presenta en los suelos de la región de Valparaíso los cuales tienen registro de actividad minera y refinadora de cobre por los últimos 60 años, nos preguntamos qué ocurre la diversidad bacteriana de los suelos aledaños a las refinerías de cobre y cómo les afecta la presencia de altas concentraciones de metales pesados, lo cual será proyectado a través de un modelo lineal simple o múltiple desarrollado en la investigación.
 
-## Metodología:
+# Metodología:
 
  **Área de estudio:** Para el presente estudio, se seleccionaron los sectores de Puchuncaví pertenecientes a la Región de Valparaíso, como áreas de estudio ya que presentan suelos de carácter agrícola históricamente contaminados. Para cada muestra se registraron las coordenadas y el tipo de cultivo presente. En cada punto se tomaron cuatro muestras de igual tamaño las cuales fueron mezcladas y posteriormente tamizadas en una malla de 2 mm para obtener una sola muestra compuesta. Las muestras fueron conservadas a 4°C hasta su uso.  
 
@@ -45,9 +45,9 @@ Conociendo la problemática que se presenta en los suelos de la región de Valpa
  
 **Determinación del número de bacterias en las muestras de suelo:** Para la determinación del número de bacterias se utilizó el método de número más probable (NMP) *(Cochran, 1950)*. Se pesó 10 g de suelo seco y se diluyeron en 90 ml de buffer fosfato (PBS). La solución fue sometida a agitación orbital a 200 rpm por 30 min a 30°C para homogenizar y disolver los agregados de suelo *(Altimira et al. 2012)*. 
 
-## Resultados 
+# Resultados 
 
-**1) Descripción de datos**
+## **Descripción de datos**
 
 A partir de los resultados presentados en la tabla 1. Se puede determinar que el pH promedio de las muestras de suelos es 6,34. Mientras que el promedio del porcentaje de materia orgánica es 3,19%, el promedio de conductividad eléctrica que poseen los suelos es 1,01.En cuanto a la textura de los suelos, estos poseen un porcentaje promedio de arena del 82,4%,de limo 13,38% y arcilla, 4,22%. Por otra parte, la concentración de metales pesados, los suelos de Puchuncaví poseen en promedio 42,77 mg/kg de plomo, 380,95 mg/Kg de cobre, 140,15 mg/Kg de Zinc, 1,16 mg/kg de cadmio y 23,03 mg/kg de arsénico, cuyos resultados se presentan en la Table 1.
 En términos de parámetros biológicos, en promedio los suelos muestreados poseen 9,45x10^6 UFC/g suelo y además, poseen una diversidad promedio de 2,83. Los resultados mencionados anteriormente presentados en la table 2.
@@ -65,7 +65,7 @@ data4 <- data3 %>% summarise_all(mean)
 kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que la columna bacterias corresponde al recuento bacteriano presente en los suelos expresado en UFC/gr de suelo") %>% kable_styling(latex_options = "striped")
 
 ```
-**2) Análisis de correlación**
+## **Análisis de correlación**
 
 En términos del análisis de correlación de Pearson (P<0,05) entre las variables físico-químicas y biológicas se obtuvieron correlaciones débiles a moderadas y algunas con tendencia negativa.
 
@@ -75,7 +75,7 @@ correlacion <- cor(data)
 corrplot::corrplot(correlacion)
 ```
 
-**3) Modelo propuesto entre las variables físico-químicas y biológicas:**
+## **Modelo propuesto entre las variables físico-químicas y biológicas:**
 
 ```{r data3, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
 (ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
@@ -124,13 +124,14 @@ Modelos <- bind_rows(Modelo1, Modelo2, Modelo3, Modelo4, Modelo5) %>% arrange(AI
 kable(Modelos, digits = 2, caption = "Tabla con valores de $r^2$ y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(latex_options = "striped")
 ```
 
-## Discusiones y conclusión
+# Discusiones y conclusión
 
 *Kuppusamy et al.,2016*, describieron el efecto de los metales y de los hidrocarburos aromáticos en la diversidad y
 abundancia de las comunidades microbianas a largo término, encontrando que en un periodo de disturbio cero las comunidades bacterianas se ven fuertemente influenciadas generando una gran reducción en la diversidad, partiendo con una selección de bacterias resistentes *(Chibuike & Obiora, 2014 y Kamnev et al., 2005)*. 
 Sin embargo, cuando se presenta una periodicidad de disturbio (contaminación) durante un tiempo prolongado, las comunidades bacterianas resistentes de estos suelos tienden a desarrollarse y en un periodo largo de tiempo no se observan diferencias significativas entre las abundancias de un suelo poco contaminado a uno altamente contaminado *(Aleem, Isar and Malik 2003; Kuppusamy et al. 2016)*. Los suelos 30 analizados en este estudio han sido afectados por contaminantes durante aproximadamente 60 años con periodos de contaminación constante *(Altimira et al. 2012; Parra et al. 2014; Salmanighabeshi et al. 2015)*.
 Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microbianos, cuya estructura y composición se ve fuertemente influenciado por el parámetro ambiental de pH. Los suelos con pH neutro poseen una mayor diversidad a nivel de phylum con respecto a los suelos que poseen mayor acidez y alcalinidad *(Fierer et.al, 2012)*. Debido a la elevada contaminación y al interés que generan estos suelos por ser de carácter agrícola, es de vital importancia poseer un mecanismo de recuperación que restaure la salud de estos ecosistemas.
 
+# Referencias
 
 1) *Aleem A, Isar J, Malik A. Impact of long-term application of industrial wastewater on the emergence of resistance traits in Azotobacter chroococcum isolated from rhizospheric soil. Bioresour Technol 2003;86:7–13.* 
 
