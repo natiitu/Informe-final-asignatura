@@ -10,7 +10,7 @@ output:
     extra_dependencies: float
     fig.caption: yes
     toc: no
-bibliography: Biblio.bib
+bibliography: Biblio2.bib
 ---
 
 ```{r setup, include=FALSE}
