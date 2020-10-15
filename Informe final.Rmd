@@ -4,8 +4,10 @@ title: Estudio correlacional entre las propiedades físico-químicas y microbiol
 author: "Natali Zamora Bugueño"
 date: "20-10-2020"
 output:
-   bookdown::pdf_document2:
-    extra_dependencies: ["float"]
+  pdf_document:
+    toc: no
+  bookdown::pdf_document2:
+    extra_dependencies: float
     fig.caption: yes
     toc: no
 bibliography: Biblio.bib
@@ -51,8 +53,8 @@ Conociendo la problemática que se presenta en los suelos de la región de Valpa
 
 ## **Descripción de datos**
 
-A partir de los resultados presentados en la tabla 1. Se puede determinar que el pH promedio de las muestras de suelos es 6,34. Mientras que el promedio del porcentaje de materia orgánica es 3,19%, el promedio de conductividad eléctrica que poseen los suelos es 1,01.En cuanto a la textura de los suelos, estos poseen un porcentaje promedio de arena del 82,4%,de limo 13,38% y arcilla, 4,22%. Por otra parte, la concentración de metales pesados, los suelos de Puchuncaví poseen en promedio 42,77 mg/kg de plomo, 380,95 mg/Kg de cobre, 140,15 mg/Kg de Zinc, 1,16 mg/kg de cadmio y 23,03 mg/kg de arsénico, cuyos resultados se presentan en la Table 1.
-En términos de parámetros biológicos, en promedio los suelos muestreados poseen 9,45x10^6 UFC/g suelo y además, poseen una diversidad promedio de 2,83. Los resultados mencionados anteriormente presentados en la table 2.
+A partir de los resultados presentados en la tabla 1. Se puede determinar que el pH promedio de las muestras de suelos es 6,34. Mientras que el promedio del porcentaje de materia orgánica es 3,19%, el promedio de conductividad eléctrica que poseen los suelos es 1,01.En cuanto a la textura de los suelos, estos poseen un porcentaje promedio de arena del 82,4%,de limo 13,38% y arcilla, 4,22%. Por otra parte, la concentración de metales pesados, los suelos de Puchuncaví poseen en promedio 42,77 mg/kg de plomo, 380,95 mg/Kg de cobre, 140,15 mg/Kg de Zinc, 1,16 mg/kg de cadmio y 23,03 mg/kg de arsénico, cuyos resultados se presentan en la \@ref(tab:data).
+En términos de parámetros biológicos, en promedio los suelos muestreados poseen 9,45x10^6 UFC/g suelo y además, poseen una diversidad promedio de 2,83. Los resultados mencionados anteriormente presentados en la \@ref(tab:data1).
 
 ```{r data, echo=FALSE, message=FALSE}
 data1 <- select(data, pH, EC, OM, sand, clay, silt, plomo, cobre, zinc, cadmio, arsenico)
@@ -127,8 +129,7 @@ kable(Modelos, digits = 2, caption = "Tabla con valores de $r^2$ y valor del cri
 
 # Discusiones y conclusión
 
-En [@kuppusamy2016pyrosequencing], describieron el efecto de los metales y de los hidrocarburos aromáticos en la diversidad y
-abundancia de las comunidades microbianas a largo término, encontrando que en un periodo de disturbio cero las comunidades bacterianas se ven fuertemente influenciadas generando una gran reducción en la diversidad, partiendo con una selección de bacterias resistentes [@chibuike2014heavy]. 
+En [@kuppusamy2016pyrosequencing], se describieron los efectos de los metales y de los hidrocarburos aromáticos en la diversidad y abundancia de las comunidades microbianas a largo término, encontrando que en un periodo de disturbio cero las comunidades bacterianas se ven fuertemente influenciadas generando una gran reducción en la diversidad, partiendo con una selección de bacterias resistentes [@chibuike2014heavy]. 
 Sin embargo, cuando se presenta una periodicidad de disturbio (contaminación) durante un tiempo prolongado, las comunidades bacterianas resistentes de estos suelos tienden a desarrollarse y en un periodo largo de tiempo no se observan diferencias significativas entre las abundancias de un suelo poco contaminado a uno altamente contaminado [@aleem2003impact; @kuppusamy2016pyrosequencing]. Los suelos 30 analizados en este estudio han sido afectados por contaminantes durante aproximadamente 60 años con periodos de contaminación constante [@altimira2012characterization; @parra2014distribution; @salmanighabeshi2015long]
 Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microbianos, cuya estructura y composición se ve fuertemente influenciado por el parámetro ambiental de pH. Los suelos con pH neutro poseen una mayor diversidad a nivel de phylum con respecto a los suelos que poseen mayor acidez y alcalinidad [@fierer2012cross]. Debido a la elevada contaminación y al interés que generan estos suelos por ser de carácter agrícola, es de vital importancia poseer un mecanismo de recuperación que restaure la salud de estos ecosistemas.
 
