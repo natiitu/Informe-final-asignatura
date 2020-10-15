@@ -131,21 +131,3 @@ Sin embargo, cuando se presenta una periodicidad de disturbio (contaminación) d
 Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microbianos, cuya estructura y composición se ve fuertemente influenciado por el parámetro ambiental de pH. Los suelos con pH neutro poseen una mayor diversidad a nivel de phylum con respecto a los suelos que poseen mayor acidez y alcalinidad *(Fierer et.al, 2012)*. Debido a la elevada contaminación y al interés que generan estos suelos por ser de carácter agrícola, es de vital importancia poseer un mecanismo de recuperación que restaure la salud de estos ecosistemas.
 
 # Referencias
-
-1) *Aleem A, Isar J, Malik A. Impact of long-term application of industrial wastewater on the emergence of resistance traits in Azotobacter chroococcum isolated from rhizospheric soil. Bioresour Technol 2003;86:7–13.* 
-
-2) *Altimira F, Yáñez C, Bravo G et al. Characterization of copper-resistant bacteria and bacterial communities from copper-polluted agricultural soils of central Chile. BMC Microbiol 2012;12:193.* 
-
-3) *Bloem J, Schouten  a J, Sorensen SJ et al. Monitoring and Evaluating Soil Quality., 2009.*
-
-4) *Chibuike GU, Obiora SC. Heavy Metal Polluted Soils: Effect on Plants and Bioremediation Methods. Appl Environ Soil Sci 2014;2014:1–12.*
-
-5) *Fierer N, Leff JW, Adams BJ, et al.(2012) Cross-biome metagenomicanalyses of soil microbial communities and their functional attributes. P Natl Acad Sci USA 109:21390–5.*
-
-6) *Kamnev AA, Tugarova A V, Antonyuk LP et al. Effects of heavy metals on plant-associated rhizobacteria: comparison of endophytic and non-endophytic strains of Azospirillum brasilense. J trace Elem Med Biol 2005;19:91–5.*
-
-7) *Kuppusamy S, Thavamani P, Megharaj M et al. Pyrosequencing analysis of bacterial diversity in soils contaminated long-term with PAHs and heavy metals: Implications to bioremediation. J Hazard Mater 2016;317:169–79.* 
-
-8) *Salmanighabeshi S, Palomo-Marín MR, Bernalte E et al. Long-term assessment of ecological risk from deposition of elemental pollutants in the vicinity of the industrial area of Puchuncaví Ventanas, central Chile. Sci Total Environ 2015;527–528:335–43.*
-
-9) *Parra S, Bravo MA, Quiroz W et al. Distribution of trace elements in particle size fractions for contaminated soils by a copper smelting from different zones of the Puchuncaví Valley (Chile). Chemosphere 2014;111:513–21.* 
