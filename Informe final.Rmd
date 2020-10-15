@@ -4,18 +4,14 @@ title: Estudio correlacional entre las propiedades físico-químicas y microbiol
 author: "Natali Zamora Bugueño"
 date: "20-10-2020"
 output:
-  pdf_document:
-    toc: no
-  bookdown::pdf_document2:
+   bookdown::pdf_document2:
+    extra_dependencies: ["float"]
     fig.caption: yes
     toc: no
-    extra_dependencies: float
-bibliography: Biblio.bib
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+knitr::opts_chunk$set(fig.pos = "H", out.extra = "")
 library(bookdown)
 library(tidyverse)
 library(dplyr)
@@ -59,14 +55,14 @@ En términos de parámetros biológicos, en promedio los suelos muestreados pose
 ```{r data, echo=FALSE, message=FALSE}
 data1 <- select(data, pH, EC, OM, sand, clay, silt, plomo, cobre, zinc, cadmio, arsenico)
 data2 <- data1 %>% summarise_all(mean)
-kable(data2, digits = 2, caption = "Medias de las variables físico-químicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que EC corresponde a la electroconductividad, OM se refiere al porcentaje de materia orgánica en los suelos analizados, sand corresponde al porcentaje de arena, clay al porcentaje de arcilla y silt es el porcentaje de limo. En cuanto a los metales pesados estos son presentados en unidades de mg/Kg") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+kable(data2, digits = 2, caption = "Medias de las variables físico-químicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que EC corresponde a la electroconductividad, OM se refiere al porcentaje de materia orgánica en los suelos analizados, sand corresponde al porcentaje de arena, clay al porcentaje de arcilla y silt es el porcentaje de limo. En cuanto a los metales pesados estos son presentados en unidades de mg/Kg") %>% kable_styling(latex_options = "striped")
 ```
 
 
 ```{r data1, echo=FALSE, message=FALSE}
 data3 <- select(data, bacterias, diversidad)
 data4 <- data3 %>% summarise_all(mean)
-kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que la columna bacterias corresponde al recuento bacteriano presente en los suelos expresado en UFC/gr de suelo") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que la columna bacterias corresponde al recuento bacteriano presente en los suelos expresado en UFC/gr de suelo") %>% kable_styling(latex_options = "striped")
 
 ```
 **2) Análisis de correlación**
@@ -88,20 +84,17 @@ corrplot::corrplot(correlacion)
 ```{r data4, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
 fit2 <- glance(fit1)
-kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
+kable(fit2, digits = 2, caption = "Indicadores estadísticos de modelo propuesto diversidad explicado por la variable pH") %>% kable_styling(latex_options = "striped")
 ```
 
 ```{r data5, echo=FALSE,message=FALSE}
 fit3 <-tidy(fit1)
-kable(fit3, digits = 2, caption = "Indicadores estadísticos de modelo propuesto donde la diversidad es explicada a partir de la variable pH obtenidos mediante tidy.") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
+kable(fit3, digits = 2, caption = "Indicadores estadísticos de modelo propuesto donde la diversidad es explicada a partir de la variable pH obtenidos mediante tidy.") %>% kable_styling(latex_options = "striped")
 ```
 
 ```{r data6, echo=FALSE,message=FALSE}
 fit4 <- augment(fit1)
-kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuesto en el estudio: diveridad explicada por la variable pH.") %>% kable_styling(bootstrap_options = c("striped", 
-    "hover", "condensed"))
+kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuesto en el estudio: diveridad explicada por la variable pH.") %>% kable_styling(latex_options = "striped")
 ```
 
 ```{r data7, echo=FALSE,message=FALSE, fig.cap= "Histograma residuales"}
@@ -128,7 +121,7 @@ Modelo4 <- arsenico %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Co
 Modelo5 <- Zinc %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo + Arsénico + Zinc")
 Modelos <- bind_rows(Modelo1, Modelo2, Modelo3, Modelo4, Modelo5) %>% arrange(AIC) %>% mutate(DeltaAIC = AIC - 
     min(AIC))
-kable(Modelos, digits = 2, caption = "Tabla con valores de r^2 y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+kable(Modelos, digits = 2, caption = "Tabla con valores de $r^2$ y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(latex_options = "striped")
 ```
 
 ## Discusiones y conclusión
@@ -156,6 +149,3 @@ Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microb
 8) *Salmanighabeshi S, Palomo-Marín MR, Bernalte E et al. Long-term assessment of ecological risk from deposition of elemental pollutants in the vicinity of the industrial area of Puchuncaví Ventanas, central Chile. Sci Total Environ 2015;527–528:335–43.*
 
 9) *Parra S, Bravo MA, Quiroz W et al. Distribution of trace elements in particle size fractions for contaminated soils by a copper smelting from different zones of the Puchuncaví Valley (Chile). Chemosphere 2014;111:513–21.* 
-
-
-# Referencias
