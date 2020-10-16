@@ -66,13 +66,13 @@ data2 <- data1 %>% summarise_all(mean)
 kable(data2, digits = 2, caption = "Medias de las variables físico-químicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que EC corresponde a la electroconductividad, OM se refiere al porcentaje de materia orgánica en los suelos analizados, sand corresponde al porcentaje de arena, clay al porcentaje de arcilla y silt es el porcentaje de limo. En cuanto a los metales pesados estos son presentados en unidades de mg/Kg") %>% kable_styling(latex_options = "HOLD_position")
 ```
 
-
 ```{r data1, echo=FALSE, message=FALSE}
 data3 <- select(data, bacterias, diversidad)
 data4 <- data3 %>% summarise_all(mean)
 kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas en las muestras de los suelos de Puchuncaví. Cabe mencionar que la columna bacterias corresponde al recuento bacteriano presente en los suelos expresado en UFC/gr de suelo") %>% kable_styling(latex_options = "HOLD_position")
 ```
-## **Análisis de correlación**
+
+## **Análisis de correlación:**
 
 En términos del análisis de correlación de Pearson (P<0,05) entre las variables físico-químicas y biológicas se obtuvieron correlaciones débiles a moderadas y algunas con tendencia negativa. En este caso nos enfocaremos en los valores de los coeficientes de correlación entre las variables físico-químicas y biológicas, cuya visualización es presentada a través de una matriz en la figura 1. En dicha figura se puede destacar existe una correlación moderada entre pH y el recuento de bacterias en los suelos. Mientras que existe una relación débil entre el recuente bacteriano y el porcentaje de arena, porcentaje de arcilla (inversa), concentración total de cobre, concentración total de Zinc y concentración total de Cadmio. Además, se observa qie existe una correlación muy débil o inexistente entre las variables de recuento bacteriano y Electroconductividad, porcentaje de materia orgánica, porcentaje de nitrógeno (inversa), porcentaje de carbono, porcenjae de limo (inversa), concentración total de plomo, concentración total de arsénico y la variable diversidad.
 Por otra parte, en el caso de la variable diversidad, se observa que existe una correlación débil entre esta variable y electroconductividad, porcentaje de materia orgánica, porcentaje de carbono, porcentaje de nitrógeno, porcentaje de arena (inversa), porcentaje de limo y concentración total de cobre. También, se observa la presencia de correlaciones muy débiles o inexistente entre la variable diversidad y pH (inversa), porcentaje de arcilla, concentración total de plomo, concentración total de zinc, concentración total de cadamio, concentración total de arsénico y la variable de recuento bacteriano en los suelos implicados en el estudio.
@@ -88,9 +88,10 @@ A la hora de proponer un modelo resulta interesante explicar la diversidad bacte
 
 ```{r data3, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y diversidad bacteriana."}
 (ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
+
 ```
 
-En la sección anterior, se demostró que exite una correlación muy débil o inexistente entre ambas variables, lo cual es importante a la hora de proponer modelos ya que no debe existir el problema de multicolinealidad entre las variables, esto quiere decir, que no debe existir un coeficiente de correlación muy alto entre las variables, lo cual se cumple en este caso. Los indicadores estadísticos del modelo de diversidad explicado por pH presentados en la tabla 3 y tabla 4, indican que el modelo planteado no es el más correcto debido al valor de r cuadrado, al alto valor del criterio de información de Akaike y al valor de p-value. Además, al observar la gráfica presentada en la figura 3 construida a partir de los valores de los residuales presentados en la tabla 5, se obtiene una gráfica que no posee una distribución normal, obteniéndose un gráfica desplazada hacia la derecha y con asimetría, lo cual indica que el modelo propuesto, no es el mejor.
+En la sección anterior, se demostró que exite una correlación muy débil o inexistente entre ambas variables, lo cual es importante a la hora de proponer modelos ya que no debe existir el problema de multicolinealidad entre las variables, esto quiere decir, que no debe existir un coeficiente de correlación muy alto entre las variables, lo cual se cumple en este caso. Los indicadores estadísticos del modelo de diversidad explicado por pH presentados en la tabla 3 y tabla 4, indican que el modelo planteado no es el más correcto debido al valor de r cuadrado, al alto valor del criterio de información de Akaike y al valor de p-value. Además, al observar la gráfica presentada en la figura 3 construida a partir de los valores de los residuales presentados en la tabla 5, se obtiene una gráfica que no posee una distribución normal, obteniéndose un gráfica desplazada hacia la derecha y con asimetría, lo cual indica que el modelo propuesto, no es el mejor. Por lo que, se deben proponer nuevos modelos, proponiendo modelos de regresión múltiples con otras variables regresoras que pudiesen explicar de mejor forma la variable diversidad.
 
 ```{r data4, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
@@ -112,7 +113,18 @@ kable(fit4, digits = 2, caption = "Predicciones y residuales del modelo propuest
 hist(fit4$.resid)
 ```
 
-Por otra parte,Podría ajustarse mejor si explicamos la variable diversidad con otras variables, como por ejemplo con la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico ). Se logró observar mediante el valor de AIC que entre los diferentes modelos propuestos, los mejores modelos eran: diversidad explicada por la variable pH y diversidad explicada por las variables pH y concentración de cobre en los suelos analizados.
+Dado los resultados presentados anteriormente, dejan a la vista que deben proponerse nuevos modelos que se ajusten mejor a las variables. Por lo que explicaremos la diversidad con otras variables, como por ejemplo, la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico).
+En la tabla 6, se presentan diversos modelos que fueron propuestos: pH + Cobre, pH + Cobre + Plomo, pH + Cobre + Plomo + Arsénico y pH + Cobre + Plomo + Arsénico + Zinc. 
+
+Cabe mencionar que para realizar la elección de un buen modelo, se deben tener las siguientes consideraciones:
+
+1. Elegir el modelo que posee el valor de delta AIC mayor a 2.
+
+2. Elegir el modelo con el valor AIC más bajo.
+
+3. elegir el modelo que contenga la menor cantidad de variables predictoras entre los modelos clasificados AIC (por respeto al principio de parsimonia).
+
+A partir de los resultados de la tabla 6, se logró observar mediante el valor de AIC y delta AIC (mayor a 2) que entre los diferentes modelos propuestos, los mejores modelos eran: pH + Cobre + Plomo + Arsénico y pH + Cobre + Plomo + Arsénico + Zinc. Si bien estos dos modelos poseen altos valores de AIC con respecto a los demás modelos, cabe destacar que poseen mayores valores de delta AIC por los que estarían cumpliendo con las primeras dos consideraciones. En términos de elegir cual es el mejor entre los dos. El mejor es el modelo:  pH + Cobre + Plomo + Arsénico, ya que además, posee un menor número de variables predictoras con respecto al modelo pH + Cobre + Plomo + Arsénico + Zinc, por lo que respeta el principio de parsimonia.
 
 ```{r data8, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
