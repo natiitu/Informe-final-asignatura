@@ -2,7 +2,7 @@
 title: Estudio correlacional entre las propiedades físico-químicas y microbiológicas
   de los suelos de Puchuncaví aledaños a la refinería CODELCO Ventanas
 author: "Natali Zamora Bugueño"
-date: "20-10-2020"
+date: "15-10-2020"
 output:
   pdf_document:
     toc: no
@@ -114,7 +114,7 @@ hist(fit4$.resid)
 ```
 
 Dado los resultados presentados anteriormente, dejan a la vista que deben proponerse nuevos modelos que se ajusten mejor a las variables. Por lo que explicaremos la diversidad con otras variables, como por ejemplo, la presencia de las variables de concentración de metales pesados que fueron medidos en el estudio (cobre, Zinc, plomo y arsénico).
-En la tabla 6, se presentan diversos modelos que fueron propuestos: pH + Cobre, pH + Cobre + Plomo, pH + Cobre + Plomo + Arsénico y pH + Cobre + Plomo + Arsénico + Zinc. 
+En la tabla 6, se presentan diversos modelos que fueron propuestos: Diversidad ~ pH + Cobre, Diversidad ~ pH + Cobre + Plomo, Diversidad ~ pH + Cobre + Plomo + Arsénico y Diversidad ~ pH + Cobre + Plomo + Arsénico + Zinc. 
 
 Cabe mencionar que para realizar la elección de un buen modelo, se deben tener las siguientes consideraciones:
 
@@ -124,7 +124,7 @@ Cabe mencionar que para realizar la elección de un buen modelo, se deben tener 
 
 3. elegir el modelo que contenga la menor cantidad de variables predictoras entre los modelos clasificados AIC (por respeto al principio de parsimonia).
 
-A partir de los resultados de la tabla 6, se logró observar mediante el valor de AIC y delta AIC (mayor a 2) que entre los diferentes modelos propuestos, los mejores modelos eran: pH + Cobre + Plomo + Arsénico y pH + Cobre + Plomo + Arsénico + Zinc. Si bien estos dos modelos poseen altos valores de AIC con respecto a los demás modelos, cabe destacar que poseen mayores valores de delta AIC por los que estarían cumpliendo con las primeras dos consideraciones. En términos de elegir cual es el mejor entre los dos. El mejor es el modelo:  pH + Cobre + Plomo + Arsénico, ya que además, posee un menor número de variables predictoras con respecto al modelo pH + Cobre + Plomo + Arsénico + Zinc, por lo que respeta el principio de parsimonia.
+A partir de los resultados de la tabla 6, se logró observar mediante el valor de AIC y delta AIC (mayor a 2) que entre los diferentes modelos propuestos, los mejores modelos eran: Diversidad ~ pH + Cobre + Plomo + Arsénico y Diversidad ~ pH + Cobre + Plomo + Arsénico + Zinc. Si bien estos dos modelos poseen altos valores de AIC con respecto a los demás modelos, cabe destacar que poseen mayores valores de delta AIC por los que estarían cumpliendo con las primeras dos consid eraciones. En términos de elegir cual es el mejor entre los dos. El mejor es el modelo: Diversidad ~ pH + Cobre + Plomo + Arsénico, ya que además, posee un menor número de variables predictoras con respecto al modelo Diversidad ~pH + Cobre + Plomo + Arsénico + Zinc, por lo que respeta el principio de parsimonia.
 
 ```{r data8, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
@@ -137,11 +137,11 @@ arsenico1 <- lm(diversidad~pH + cobre + plomo + arsenico,data = data)
 arsenico <- glance(arsenico1)
 Zinc1 <- lm(diversidad~pH + cobre + plomo + arsenico + zinc,data = data)
 Zinc <- glance(Zinc1)
-Modelo1 <- pH %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH")
-Modelo2 <- cobre %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre")
-Modelo3 <- plomo %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo")
-Modelo4 <- arsenico %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo + Arsénico")
-Modelo5 <- Zinc %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="pH + Cobre + Plomo + Arsénico + Zinc")
+Modelo1 <- pH %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="Diversidad ~ pH")
+Modelo2 <- cobre %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="Diversidad ~ pH + Cobre")
+Modelo3 <- plomo %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="Diversidad ~ pH + Cobre + Plomo")
+Modelo4 <- arsenico %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="Diversidad ~ pH + Cobre + Plomo + Arsénico")
+Modelo5 <- Zinc %>% dplyr::select(r.squared, AIC) %>% mutate(Modelo="Diversidad ~ pH + Cobre + Plomo + Arsénico + Zinc")
 Modelos <- bind_rows(Modelo1, Modelo2, Modelo3, Modelo4, Modelo5) %>% arrange(AIC) %>% mutate(DeltaAIC = AIC - 
     min(AIC))
 kable(Modelos, digits = 2, caption = "Tabla con valores de $r^2$ y valor del criterio de información de Akaike (AIC) de los diferentes modelos propuestos en el estudio") %>% kable_styling(latex_options = "HOLD_position")
@@ -149,8 +149,10 @@ kable(Modelos, digits = 2, caption = "Tabla con valores de $r^2$ y valor del cri
 
 # Discusiones y conclusión
 
-En [@kuppusamy2016pyrosequencing], se describieron los efectos de los metales y de los hidrocarburos aromáticos en la diversidad y abundancia de las comunidades microbianas a largo término, encontrando que en un periodo de disturbio cero las comunidades bacterianas se ven fuertemente influenciadas generando una gran reducción en la diversidad, partiendo con una selección de bacterias resistentes [@chibuike2014heavy]. 
+En [@kuppusamy2016pyrosequencing], se describieron los efectos de los metales y de los hidrocarburos aromáticos en la diversidad y abundancia de las comunidades microbianas a largo plazo, encontrando que en un periodo de disturbio, las comunidades bacterianas se ven fuertemente influenciadas generando una gran reducción en la diversidad, partiendo con una selección de bacterias resistentes [@chibuike2014heavy]. 
 Sin embargo, cuando se presenta una periodicidad de disturbio (contaminación) durante un tiempo prolongado, las comunidades bacterianas resistentes de estos suelos tienden a desarrollarse y en un periodo largo de tiempo no se observan diferencias significativas entre las abundancias de un suelo poco contaminado a uno altamente contaminado [@aleem2003impact; @kuppusamy2016pyrosequencing]. Los suelos 30 analizados en este estudio han sido afectados por contaminantes durante aproximadamente 60 años con periodos de contaminación constante [@altimira2012characterization; @parra2014distribution; @salmanighabeshi2015long]
 Los suelos de los diferentes biomas alojan distintos ensamblajes de taxas microbianos, cuya estructura y composición se ve fuertemente influenciado por el parámetro ambiental de pH. Los suelos con pH neutro poseen una mayor diversidad a nivel de phylum con respecto a los suelos que poseen mayor acidez y alcalinidad [@fierer2012cross]. Debido a la elevada contaminación y al interés que generan estos suelos por ser de carácter agrícola, es de vital importancia poseer un mecanismo de recuperación que restaure la salud de estos ecosistemas.
+
+En conclusión, los factores abióticos como los metales pesados influencian el valor de las variables biológicas como la diversidad. Los metales pesados generan un presión selectiva sobre la estructura y composición de las comunidades bacterianas. Donde aquellas quep poseen mecanismos de resistencia hacia altas concentraciones de los metales implicados en el estudio, lograrán subsistir en la comunidad. Si bien en el presente trabajo, se cumplieron los objetivos propuestos en un principio, en futuros estudios realizaría otros modelos con otras variables físico-químicas complementado con análisis multivariados como análisis de componentes principales (PCA), de manera de determinar la relación e influencia de las variables físico-químicas sobre las variables biológicas.
 
 # Referencias
