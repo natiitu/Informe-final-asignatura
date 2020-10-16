@@ -74,20 +74,24 @@ kable(data4, digits = 2, caption = "Medias de las variables biológicas medidas 
 ```
 ## **Análisis de correlación**
 
-En términos del análisis de correlación de Pearson (P<0,05) entre las variables físico-químicas y biológicas se obtuvieron correlaciones débiles a moderadas y algunas con tendencia negativa.
+En términos del análisis de correlación de Pearson (P<0,05) entre las variables físico-químicas y biológicas se obtuvieron correlaciones débiles a moderadas y algunas con tendencia negativa. En este caso nos enfocaremos en los valores de los coeficientes de correlación entre las variables físico-químicas y biológicas, cuya visualización es presentada a través de una matriz en la figura 1. En dicha figura se puede destacar existe una correlación moderada entre pH y el recuento de bacterias en los suelos. Mientras que existe una relación débil entre el recuente bacteriano y el porcentaje de arena, porcentaje de arcilla (inversa), concentración total de cobre, concentración total de Zinc y concentración total de Cadmio. Además, se observa qie existe una correlación muy débil o inexistente entre las variables de recuento bacteriano y Electroconductividad, porcentaje de materia orgánica, porcentaje de nitrógeno (inversa), porcentaje de carbono, porcenjae de limo (inversa), concentración total de plomo, concentración total de arsénico y la variable diversidad.
+Por otra parte, en el caso de la variable diversidad, se observa que existe una correlación débil entre esta variable y electroconductividad, porcentaje de materia orgánica, porcentaje de carbono, porcentaje de nitrógeno, porcentaje de arena (inversa), porcentaje de limo y concentración total de cobre. También, se observa la presencia de correlaciones muy débiles o inexistente entre la variable diversidad y pH (inversa), porcentaje de arcilla, concentración total de plomo, concentración total de zinc, concentración total de cadamio, concentración total de arsénico y la variable de recuento bacteriano en los suelos implicados en el estudio.
 
-
-```{r data2, echo=FALSE, message=FALSE, fig.cap="Matriz de análisis de correlación"}
+```{r data2, echo=FALSE, message=FALSE, fig.cap="Matriz de análisis de correlación entre variables físico-químicas y biológicas."}
 correlacion <- cor(data) 
 corrplot::corrplot(correlacion)
 ```
 
 ## **Modelo propuesto entre las variables físico-químicas y biológicas:**
 
-```{r data3, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y número total de bacterias presentes en los suelos muestreados."}
-(ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
+A la hora de proponer un modelo resulta interesante explicar la diversidad bacteriana en términos del valor del pH, pues se ha observado que los sitios contaminados con metales pesados son lugares que varían desde pH ácidos a ligeremente ácidos. Por lo que sería importante tener un modelo lineal que permita predecir la diversidad bacteriana en términos del pH. Ante esta premisa, es importante observar como están relacionadas dichas variables de manera lineal. Por lo que en la figura 2, se puede observar una gráfica de dispersión que denota una relación lineal muy débil o inexistente e inversa.
 
+```{r data3, echo=FALSE,message=FALSE, fig.cap="Gráfica de dispersión de variables pH y diversidad bacteriana."}
+(ggplot(data = data) + geom_point(mapping = aes(x = pH, y = diversidad), color = "blue"))
 ```
+
+En la sección anterior, se demostró que exite una correlación muy débil o inexistente entre ambas variables, lo cual es importante a la hora de proponer modelos ya que no debe existir el problema de multicolinealidad entre las variables, esto quiere decir, que no debe existir un coeficiente de correlación muy alto entre las variables, lo cual se cumple en este caso. Los indicadores estadísticos del modelo de diversidad explicado por pH presentados en la tabla 3 y tabla 4, indican que el modelo planteado no es el más correcto debido al valor de r cuadrado, al alto valor del criterio de información de Akaike y al valor de p-value. Además, al observar la gráfica presentada en la figura 3 construida a partir de los valores de los residuales presentados en la tabla 5, se obtiene una gráfica que no posee una distribución normal, obteniéndose un gráfica desplazada hacia la derecha y con asimetría, lo cual indica que el modelo propuesto, no es el mejor.
+
 ```{r data4, echo=FALSE,message=FALSE}
 fit1 <- lm(diversidad~pH,data = data)
 fit2 <- glance(fit1)
